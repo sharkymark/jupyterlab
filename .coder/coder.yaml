@@ -49,12 +49,7 @@ workspace:
           directory: /home/coder/
           shell: /bin/bash
           command: |
-            pip3 install pandas --user
-        - name: "start python web server"
-          directory: /home/coder/
-          shell: /bin/bash
-          command: |
-            python3 -m http.server 8000 &                    
+            pip3 install pandas --user                   
         - name: "install fzf fuzzy find and vim editor"
           directory: /home/coder/
           shell: /bin/bash
