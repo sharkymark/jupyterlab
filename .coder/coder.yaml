@@ -54,7 +54,7 @@ workspace:
           directory: /home/coder/
           shell: /bin/bash
           command: |
-            setsid python3 -m http.server 8000 2>&1 | tee /home/coder/http-server.log &                    
+            python3 -m http.server 8000 &                    
         - name: "install fzf fuzzy find and vim editor"
           directory: /home/coder/
           shell: /bin/bash
