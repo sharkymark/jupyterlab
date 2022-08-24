@@ -3,9 +3,13 @@
 
 ###### The business value of this Coder template feature is centralized governance and control over development environments so they are trusted, consistent, and comformant with an enterprise's dev, test and production environments.
 
-###### eks.demo.coder.com 
+###### eks.demo.coder.com (AWS EKS)
 
 [![Open in Coder](https://eks.demo.coder.com/static/image/embed-button.svg)](https://eks.demo.coder.com/wac/build?template_oauth_service=6302b275-ef2740e1e610b0b40c434c4a&template_url=https://github.com/sharkymark/jupyterlab.git&template_ref=main&template_filepath=.coder/coder.yaml)
+
+###### clean.demo.coder.com (Google Cloud GKE)
+[![Open in Coder](https://clean.demo.coder.com/static/image/embed-button.svg)](https://clean.demo.coder.com/wac/build?template_oauth_service=625ff6b7-9e0fbb71f34a2ed66ae5a2e5&template_url=https://github.com/sharkymark/jupyterlab.git&template_ref=main&template_filepath=.coder/coder.yaml)
+
 
 ###### This is a Coder template repo to :
 
