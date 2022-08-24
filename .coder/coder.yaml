@@ -45,11 +45,16 @@ workspace:
               git clone git@github.com:sharkymark/pandas_automl.git 
               echo 'cloned pandas_automl repo'
             fi  
+        - name: "install Python package pandas"
+          directory: /home/coder/
+          shell: /bin/bash
+          command: |
+            pip3 install pandas             
         - name: "start python web server"
           directory: /home/coder/
           shell: /bin/bash
           command: |
-            setsid python -m http. server 8000 2>&1 | tee /home/coder/http-server.log &                    
+            setsid python3 -m http. server 8000 2>&1 | tee /home/coder/http-server.log &                    
         - name: "install fzf fuzzy find and vim editor"
           directory: /home/coder/
           shell: /bin/bash
