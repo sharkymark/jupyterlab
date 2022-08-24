@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://clean.demo.coder.com/api/private/template/schemas/wac.schema.json
+version: 0.2
+workspace:
+  type: kubernetes
+  specs:
+    kubernetes:
+      image:
+        value: index.docker.io/marktmilligan/jupyterlab:notebook-icon
+      container-based-vm:
+        value: true
+      cpu: 
+        value: 2
+      memory:
+        value: 2 
+      disk:
+        value: 10
+      gpu-count:
+        value: 0
+      labels:
+        value:  
+          com.coder.custom.chargeback: "datascience_team5b"
+  configure:
+    start:
+      value:
+        - name: install Python VS Code extension (vsix) from open vsx
+          continue-on-error: true
+          directory: /home/coder/
+          shell: /bin/bash
+          command: SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item /var/tmp/coder/code-server/bin/code-server --install-extension ms-python.python     
+        - name: install Jupyter Notebook (vsix) from open vsx
+          continue-on-error: true
+          directory: /home/coder/
+          shell: /bin/bash
+          command: SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item /var/tmp/coder/code-server/bin/code-server --install-extension ms-toolsai.jupyter        
+        - name: set ssh keys and clone for projects
+          directory: /home/coder/
+          shell: /bin/bash
+          command: |
+            continue-on-error: true
+            ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+            REPO_1_PATH=$HOME/pandas_automl
+            if [ -d $REPO_1_PATH ]; then
+              echo 'pandas_automl repo already exists - skip clone'
+            else
+              git clone git@github.com:sharkymark/pandas_automl.git 
+              echo 'cloned pandas_automl repo'
+            fi  
+        - name: "start python web server"
+          directory: /home/coder/
+          shell: /bin/bash
+          command: |
+            setsid python -m http. server 8000 2>&1 | tee /home/coder/http-server.log &                    
+        - name: "install fzf fuzzy find and vim editor"
+          directory: /home/coder/
+          shell: /bin/bash
+          command: |
+            continue-on-error: true
+            if [ -f "/etc/arch-release" ]; then
+              echo "Arch Linux"
+              sudo pacman -S fzf --noconfirm
+              sudo pacman -S vim --noconfirm
+              echo 'installed fzf and nim'
+            elif [ -f "/etc/lsb-release" ]; then
+              echo "Ubuntu" 
+              sudo apt update
+              sudo apt install fzf
+              sudo apt install vim
+              echo 'installed fzf and nim'
+            fi             
+  dev-urls:
+    value:
+      - name: http-server
+        port: 8000
+        scheme: http
+        access: org                
